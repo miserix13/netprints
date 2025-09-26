@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using NetPrints.Core;
-using System.Windows.Forms;
 
 namespace NetPrintsEditor
 {
@@ -29,7 +28,7 @@ namespace NetPrintsEditor
 
         private void OnAddAssemblyReferenceClicked(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
 
             if (openFileDialog.ShowDialog() == true)
             {
@@ -45,15 +44,15 @@ namespace NetPrintsEditor
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Failed to add assembly at {openFileDialog.FileName}:\n\n{ex}");
+                    MessageBoxResult messageBoxResult = MessageBox.Show($"Failed to add assembly at {openFileDialog.FileName}:\n\n{ex}");
                 }
             }
         }
 
         private void OnAddSourceDirectoryReferenceClicked(object sender, RoutedEventArgs e)
         {
-            var openFolderDialog = new FolderBrowserDialog();
-            if (openFolderDialog.ShowDialog() == DialogResult.OK)
+            var openFolderDialog = new WinForms.FolderBrowserDialog();
+            if (openFolderDialog.ShowDialog() == WinForms.DialogResult.OK)
             {
                 try
                 {
@@ -67,14 +66,14 @@ namespace NetPrintsEditor
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Failed to add sources at {openFolderDialog.SelectedPath}:\n\n{ex}");
+                    System.Windows.MessageBox.Show($"Failed to add sources at {openFolderDialog.SelectedPath}:\n\n{ex}");
                 }
             }
         }
 
         private void OnRemoveReferenceClicked(object sender, RoutedEventArgs e)
         {
-            if (sender is Button button && button.DataContext is CompilationReferenceVM reference)
+            if (sender is WpfButton button && button.DataContext is CompilationReferenceVM reference)
             {
                 ViewModel.Project.References.Remove(reference.Reference);
             }
