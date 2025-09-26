@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using NetPrints.Core;
 using NetPrints.Graph;
 using NetPrints.Translator;
@@ -12,7 +12,7 @@ using System.Windows.Media;
 
 namespace NetPrintsEditor.ViewModels
 {
-    public class NodePinVM : ViewModelBase
+    public class NodePinVM : ObservableObject
     {
         public string ToolTip
         {
@@ -113,7 +113,7 @@ namespace NetPrintsEditor.ViewModels
                     }
 
                     OnPropertyChanged(nameof(IsBeingConnected));
-                    RaisePropertyChanged(nameof(IsCableVisible));
+                    OnPropertyChanged(nameof(IsCableVisible));
                     OnConnectionPositionUpdate();
                 }
             }
@@ -146,26 +146,26 @@ namespace NetPrintsEditor.ViewModels
                     }
 
                     OnPropertyChanged(nameof(Pin));
-                    RaisePropertyChanged(nameof(FillBrush));
-                    RaisePropertyChanged(nameof(BorderBrush));
-                    RaisePropertyChanged(nameof(ShowUnconnectedValue));
-                    RaisePropertyChanged(nameof(ShowEnumValue));
-                    RaisePropertyChanged(nameof(ShowBooleanValue));
-                    RaisePropertyChanged(nameof(PossibleEnumNames));
-                    RaisePropertyChanged(nameof(ToolTip));
-                    RaisePropertyChanged(nameof(IsRerouteNodePin));
+                    OnPropertyChanged(nameof(FillBrush));
+                    OnPropertyChanged(nameof(BorderBrush));
+                    OnPropertyChanged(nameof(ShowUnconnectedValue));
+                    OnPropertyChanged(nameof(ShowEnumValue));
+                    OnPropertyChanged(nameof(ShowBooleanValue));
+                    OnPropertyChanged(nameof(PossibleEnumNames));
+                    OnPropertyChanged(nameof(ToolTip));
+                    OnPropertyChanged(nameof(IsRerouteNodePin));
                 }
             }
         }
 
         private void OnInputTypeChanged(object sender, EventArgs eventArgs)
         {
-            RaisePropertyChanged(nameof(PossibleEnumNames));
-            RaisePropertyChanged(nameof(ShowUnconnectedValue));
-            RaisePropertyChanged(nameof(ShowBooleanValue));
-            RaisePropertyChanged(nameof(ShowEnumValue));
-            RaisePropertyChanged(nameof(DisplayName));
-            RaisePropertyChanged(nameof(ToolTip));
+            OnPropertyChanged(nameof(PossibleEnumNames));
+            OnPropertyChanged(nameof(ShowUnconnectedValue));
+            OnPropertyChanged(nameof(ShowBooleanValue));
+            OnPropertyChanged(nameof(ShowEnumValue));
+            OnPropertyChanged(nameof(DisplayName));
+            OnPropertyChanged(nameof(ToolTip));
         }
 
         public bool IsRerouteNodePin
@@ -287,7 +287,7 @@ namespace NetPrintsEditor.ViewModels
                 {
                     pin.Name = value;
                     OnPropertyChanged(nameof(Name));
-                    RaisePropertyChanged(nameof(DisplayName));
+                    OnPropertyChanged(nameof(DisplayName));
                 }
             }
         }
@@ -306,7 +306,7 @@ namespace NetPrintsEditor.ViewModels
                 {
                     positionX = value;
                     OnPropertyChanged(nameof(PositionX));
-                    RaisePropertyChanged(nameof(Position));
+                    OnPropertyChanged(nameof(Position));
                     OnConnectionPositionUpdate();
                 }
             }
@@ -321,7 +321,7 @@ namespace NetPrintsEditor.ViewModels
                 {
                     positionY = value;
                     OnPropertyChanged(nameof(PositionY));
-                    RaisePropertyChanged(nameof(Position));
+                    OnPropertyChanged(nameof(Position));
                     OnConnectionPositionUpdate();
                 }
             }
@@ -400,11 +400,11 @@ namespace NetPrintsEditor.ViewModels
 
         private void OnConnectionPositionUpdate()
         {
-            RaisePropertyChanged(nameof(NodeRelativePosition));
-            RaisePropertyChanged(nameof(ConnectedAbsolutePosition));
-            RaisePropertyChanged(nameof(ConnectedCP1));
-            RaisePropertyChanged(nameof(ConnectedCP2));
-            RaisePropertyChanged(nameof(AbsolutePosition));
+            OnPropertyChanged(nameof(NodeRelativePosition));
+            OnPropertyChanged(nameof(ConnectedAbsolutePosition));
+            OnPropertyChanged(nameof(ConnectedCP1));
+            OnPropertyChanged(nameof(ConnectedCP2));
+            OnPropertyChanged(nameof(AbsolutePosition));
         }
 
         // = Incoming pin for data input
@@ -451,13 +451,13 @@ namespace NetPrintsEditor.ViewModels
 
                     connectedPin = value;
                     OnPropertyChanged(nameof(ConnectedPin));
-                    RaisePropertyChanged(nameof(IsConnected));
-                    RaisePropertyChanged(nameof(IsCableVisible));
-                    RaisePropertyChanged(nameof(ShowUnconnectedValue));
-                    RaisePropertyChanged(nameof(ShowEnumValue));
-                    RaisePropertyChanged(nameof(PossibleEnumNames));
-                    RaisePropertyChanged(nameof(FillBrush));
-                    RaisePropertyChanged(nameof(DefaultValueIndicatorBrush));
+                    OnPropertyChanged(nameof(IsConnected));
+                    OnPropertyChanged(nameof(IsCableVisible));
+                    OnPropertyChanged(nameof(ShowUnconnectedValue));
+                    OnPropertyChanged(nameof(ShowEnumValue));
+                    OnPropertyChanged(nameof(PossibleEnumNames));
+                    OnPropertyChanged(nameof(FillBrush));
+                    OnPropertyChanged(nameof(DefaultValueIndicatorBrush));
                     OnConnectionPositionUpdate();
 
                     if (connectedPin != null)
