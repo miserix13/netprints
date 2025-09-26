@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System.Windows.Forms;
 using NetPrintsEditor.ViewModels;
 using System;
 using System.IO;
@@ -51,7 +52,7 @@ namespace NetPrintsEditor
 
         private void OnAddSourceDirectoryReferenceClicked(object sender, RoutedEventArgs e)
         {
-            var openFolderDialog = new WinForms.FolderBrowserDialog();
+            var openFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
             if (openFolderDialog.ShowDialog() == WinForms.DialogResult.OK)
             {
                 try
