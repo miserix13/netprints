@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using NetPrints.Core;
+using System.Windows.Forms;
 
 namespace NetPrintsEditor
 {
