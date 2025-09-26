@@ -112,7 +112,7 @@ namespace NetPrintsEditor.ViewModels
                         ConnectedPin = null;
                     }
 
-                    RaisePropertyChanged();
+                    OnPropertyChanged(nameof(IsBeingConnected));
                     RaisePropertyChanged(nameof(IsCableVisible));
                     OnConnectionPositionUpdate();
                 }
@@ -145,7 +145,7 @@ namespace NetPrintsEditor.ViewModels
                         pin.Node.InputTypeChanged += OnInputTypeChanged;
                     }
 
-                    RaisePropertyChanged();
+                    OnPropertyChanged(nameof(Pin));
                     RaisePropertyChanged(nameof(FillBrush));
                     RaisePropertyChanged(nameof(BorderBrush));
                     RaisePropertyChanged(nameof(ShowUnconnectedValue));
@@ -217,7 +217,7 @@ namespace NetPrintsEditor.ViewModels
                         p.UnconnectedValue = value;
                     }
 
-                    RaisePropertyChanged();
+                    OnPropertyChanged(nameof(UnconnectedValue));
                 }
             }
         }
@@ -286,7 +286,7 @@ namespace NetPrintsEditor.ViewModels
                 if (pin.Name != value)
                 {
                     pin.Name = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged(nameof(Name));
                     RaisePropertyChanged(nameof(DisplayName));
                 }
             }
@@ -305,7 +305,7 @@ namespace NetPrintsEditor.ViewModels
                 if (positionX != value)
                 {
                     positionX = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged(nameof(PositionX));
                     RaisePropertyChanged(nameof(Position));
                     OnConnectionPositionUpdate();
                 }
@@ -320,7 +320,7 @@ namespace NetPrintsEditor.ViewModels
                 if (positionY != value)
                 {
                     positionY = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged(nameof(PositionY));
                     RaisePropertyChanged(nameof(Position));
                     OnConnectionPositionUpdate();
                 }
@@ -450,7 +450,7 @@ namespace NetPrintsEditor.ViewModels
                     }
 
                     connectedPin = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged(nameof(ConnectedPin));
                     RaisePropertyChanged(nameof(IsConnected));
                     RaisePropertyChanged(nameof(IsCableVisible));
                     RaisePropertyChanged(nameof(ShowUnconnectedValue));
@@ -607,8 +607,8 @@ namespace NetPrintsEditor.ViewModels
         {
             if (Pin is NodeInputDataPin idp && e.PropertyName == nameof(idp.UnconnectedValue))
             {
-                RaisePropertyChanged(nameof(UnconnectedTextWatermark));
-                RaisePropertyChanged(nameof(DefaultValueIndicatorBrush));
+                OnPropertyChanged(nameof(UnconnectedTextWatermark));
+                OnPropertyChanged(nameof(DefaultValueIndicatorBrush));
             }
         }
 
