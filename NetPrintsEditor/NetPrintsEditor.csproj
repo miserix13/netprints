@@ -11,6 +11,7 @@
     <ApplicationIcon>NetPrintsLogo.ico</ApplicationIcon>
     <CodeAnalysisRuleSet>../CSharpRuleSet.ruleset</CodeAnalysisRuleSet>
     <LangVersion>preview</LangVersion>
+    <UseWindowsForms>True</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="ClassEditorWindow.xaml" />
