@@ -663,7 +663,7 @@ namespace NetPrintsEditor.ViewModels
                 addedNodes.ToList().ForEach(n => SetupNodeConnections(n, true));
             }
 
-            RaisePropertyChanged(); // No parameterless overload in new MVVM Light, use Set or OnPropertyChanged if available, or implement INotifyPropertyChanged pattern.
+            OnPropertyChanged(string.Empty); // Use OnPropertyChanged with property name or string.Empty to indicate all properties changed.
         }
 
         private void OnPinCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
