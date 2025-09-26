@@ -625,8 +625,8 @@ namespace NetPrintsEditor.ViewModels
                     }
 
                     graph = value;
-                    RaisePropertyChanged(); // No parameterless overload in new MVVM Light, use Set or OnPropertyChanged if available, or implement INotifyPropertyChanged pattern.
-                    RaisePropertyChanged(); // No parameterless overload in new MVVM Light, use Set or OnPropertyChanged if available, or implement INotifyPropertyChanged pattern.
+                    OnPropertyChanged(); // Use OnPropertyChanged from CommunityToolkit.Mvvm.ComponentModel.ObservableObject as replacement for RaisePropertyChanged.
+                    OnPropertyChanged(); // Use OnPropertyChanged from CommunityToolkit.Mvvm.ComponentModel.ObservableObject as replacement for RaisePropertyChanged.
 
                     Nodes = new ObservableViewModelCollection<NodeVM, Node>(Graph.Nodes, n => new NodeVM(n));
 
