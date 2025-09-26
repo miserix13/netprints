@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using System.Windows.Forms;
 using NetPrintsEditor.ViewModels;
 using System;
 using System.IO;
@@ -52,12 +51,13 @@ namespace NetPrintsEditor
 
         private void OnAddSourceDirectoryReferenceClicked(object sender, RoutedEventArgs e)
         {
-            var openFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
-            if (openFolderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            var openFolderDialog = new OpenFolderDialog();
+            if (openFolderDialog.ShowDialog().Value)
             {
                 try
                 {
-                    var sourceDirectoryReference = new SourceDirectoryReference(openFolderDialog.SelectedPath);
+                    // Use FolderName property instead of non-existent SelectedPath
+                    var sourceDirectoryReference = new SourceDirectoryReference(openFolderDialog.FolderName);
 
                     if (!ViewModel.Project.References.OfType<SourceDirectoryReference>().Any(r =>
                         string.Equals(Path.GetFullPath(r.SourceDirectory), Path.GetFullPath(sourceDirectoryReference.SourceDirectory), StringComparison.OrdinalIgnoreCase)))
@@ -67,14 +67,14 @@ namespace NetPrintsEditor
                 }
                 catch (Exception ex)
                 {
-                    System.Windows.MessageBox.Show($"Failed to add sources at {openFolderDialog.SelectedPath}:\n\n{ex}");
+                    System.Windows.MessageBox.Show($"Failed to add sources at {openFolderDialog.FolderName}:\n\n{ex}");
                 }
             }
         }
 
         private void OnRemoveReferenceClicked(object sender, RoutedEventArgs e)
         {
-            if (sender is WpfButton button && button.DataContext is CompilationReferenceVM reference)
+            if (sender is Button button && button.DataContext is CompilationReferenceVM reference)
             {
                 ViewModel.Project.References.Remove(reference.Reference);
             }
