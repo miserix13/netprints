@@ -690,7 +690,7 @@ namespace NetPrintsEditor.ViewModels
                 addedPins.ToList().ForEach(p => SetupPinEvents(p, true));
             }
 
-            RaisePropertyChanged(); // No parameterless overload in new MVVM Light, use Set or OnPropertyChanged if available, or implement INotifyPropertyChanged pattern.
+            OnPropertyChanged(string.Empty); // Use OnPropertyChanged from CommunityToolkit.Mvvm.ComponentModel.ObservableObject to notify all properties changed.
         }
 
         private void OnInputDataPinIncomingPinChanged(NodeInputDataPin pin, NodeOutputDataPin oldPin, NodeOutputDataPin newPin)
