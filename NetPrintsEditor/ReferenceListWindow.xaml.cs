@@ -53,7 +53,7 @@ namespace NetPrintsEditor
         private void OnAddSourceDirectoryReferenceClicked(object sender, RoutedEventArgs e)
         {
             var openFolderDialog = new FolderBrowserDialog();
-            if (openFolderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (openFolderDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
