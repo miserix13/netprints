@@ -88,7 +88,7 @@ namespace NetPrintsEditor.ViewModels
                 if (connectingRelativeMousePosition != value)
                 {
                     connectingRelativeMousePosition = value;
-                    RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(ConnectingAbsolutePosition));
                     OnConnectionPositionUpdate();
                 }
             }
