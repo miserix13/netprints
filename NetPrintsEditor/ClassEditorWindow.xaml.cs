@@ -59,7 +59,10 @@ namespace NetPrintsEditor
         {
             Project project = ViewModel.Project;
 
-            project.PropertyChanged += OnProjectPropertyChangedWhileCompiling;
+            if (project is INotifyPropertyChanged notifyProject)
+            {
+                notifyProject.PropertyChanged += OnProjectPropertyChangedWhileCompiling;
+            }
             project.CompileProject();
         }
 
@@ -69,7 +72,10 @@ namespace NetPrintsEditor
 
             if (e.PropertyName == nameof(project.IsCompiling) && !project.IsCompiling)
             {
-                project.PropertyChanged -= OnProjectPropertyChangedWhileCompiling;
+                if (project is INotifyPropertyChanged notifyProject)
+                {
+                    notifyProject.PropertyChanged -= OnProjectPropertyChangedWhileCompiling;
+                }
 
                 if (project.LastCompilationSucceeded)
                 {
