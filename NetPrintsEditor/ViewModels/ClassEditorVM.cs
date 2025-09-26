@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using NetPrints.Core;
 using NetPrints.Graph;
 using NetPrints.Translator;
@@ -81,7 +81,7 @@ namespace NetPrintsEditor.ViewModels
 
         public ClassEditorVM(ClassGraph cls)
         {
-            MessengerInstance.Register<OpenGraphMessage>(this, OnOpenGraphReceived);
+            WeakReferenceMessenger.Default.Register<OpenGraphMessage>(this, OnOpenGraphReceived);
 
             Class = cls;
 
@@ -132,12 +132,12 @@ namespace NetPrintsEditor.ViewModels
 
         public void OpenGraph(NodeGraph graph)
         {
-            MessengerInstance.Send(new OpenGraphMessage(graph));
+            WeakReferenceMessenger.Default.Send(new OpenGraphMessage(graph));
         }
 
         public void OpenClassGraph()
         {
-            MessengerInstance.Send(new OpenGraphMessage(Class));
+            WeakReferenceMessenger.Default.Send(new OpenGraphMessage(Class));
         }
 
         public void CreateConstructor(double gridCellSize)
