@@ -5,12 +5,12 @@ using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using System.Linq;
 using System;
-using GalaSoft.MvvmLight;
+using CommunityToolkit.Mvvm.ComponentModel;
 using NetPrintsEditor.Messages;
 
 namespace NetPrintsEditor.ViewModels
 {
-    public class NodeVM : ViewModelBase
+    public class NodeVM : ObservableObject
     {
         private static readonly SolidColorBrush DefaultNodeBrush =
             new SolidColorBrush(Color.FromArgb(0xFF, 0x30, 0x30, 0x30));
@@ -220,9 +220,9 @@ namespace NetPrintsEditor.ViewModels
                 if (isSelected != value)
                 {
                     isSelected = value;
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(BorderBrush));
-                    RaisePropertyChanged(nameof(ZIndex));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(BorderBrush));
+                    OnPropertyChanged(nameof(ZIndex));
                 }
             }
         }
@@ -266,7 +266,7 @@ namespace NetPrintsEditor.ViewModels
                 if (node.Name != value)
                 {
                     node.Name = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -279,7 +279,7 @@ namespace NetPrintsEditor.ViewModels
                 if (inputDataPins != value)
                 {
                     inputDataPins = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -292,7 +292,7 @@ namespace NetPrintsEditor.ViewModels
                 if (outputDataPins != value)
                 {
                     outputDataPins = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -305,7 +305,7 @@ namespace NetPrintsEditor.ViewModels
                 if (inputExecPins != value)
                 {
                     inputExecPins = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -318,7 +318,7 @@ namespace NetPrintsEditor.ViewModels
                 if (outputExecPins != value)
                 {
                     outputExecPins = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -331,7 +331,7 @@ namespace NetPrintsEditor.ViewModels
                 if (inputTypePins != value)
                 {
                     inputTypePins = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -344,7 +344,7 @@ namespace NetPrintsEditor.ViewModels
                 if (outputTypePins != value)
                 {
                     outputTypePins = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -407,26 +407,26 @@ namespace NetPrintsEditor.ViewModels
 
                     UpdateOverloads();
 
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(Brush));
-                    RaisePropertyChanged(nameof(ToolTip));
-                    RaisePropertyChanged(nameof(IsRerouteNode));
-                    RaisePropertyChanged(nameof(ShowLeftPinButtons));
-                    RaisePropertyChanged(nameof(ShowRightPinButtons));
-                    RaisePropertyChanged(nameof(LeftPlusToolTip));
-                    RaisePropertyChanged(nameof(LeftMinusToolTip));
-                    RaisePropertyChanged(nameof(RightPlusToolTip));
-                    RaisePropertyChanged(nameof(RightMinusToolTip));
-                    RaisePropertyChanged(nameof(Label));
-                    RaisePropertyChanged(nameof(IsPure));
-                    RaisePropertyChanged(nameof(CanSetPure));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Brush));
+                    OnPropertyChanged(nameof(ToolTip));
+                    OnPropertyChanged(nameof(IsRerouteNode));
+                    OnPropertyChanged(nameof(ShowLeftPinButtons));
+                    OnPropertyChanged(nameof(ShowRightPinButtons));
+                    OnPropertyChanged(nameof(LeftPlusToolTip));
+                    OnPropertyChanged(nameof(LeftMinusToolTip));
+                    OnPropertyChanged(nameof(RightPlusToolTip));
+                    OnPropertyChanged(nameof(RightMinusToolTip));
+                    OnPropertyChanged(nameof(Label));
+                    OnPropertyChanged(nameof(IsPure));
+                    OnPropertyChanged(nameof(CanSetPure));
                 }
             }
         }
 
         private void OnInputTypeChanged(object sender, EventArgs e)
         {
-            RaisePropertyChanged(nameof(Label));
+            OnPropertyChanged(nameof(Label));
         }
 
         public string Label
@@ -443,8 +443,8 @@ namespace NetPrintsEditor.ViewModels
             set
             {
                 overloads = value;
-                RaisePropertyChanged();
-                RaisePropertyChanged(nameof(ShowOverloads));
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(ShowOverloads));
             }
         }
 
@@ -695,8 +695,8 @@ namespace NetPrintsEditor.ViewModels
                 Overloads.Clear();
             }
 
-            RaisePropertyChanged(nameof(ShowOverloads));
-            RaisePropertyChanged(nameof(Overloads));
+            OnPropertyChanged(nameof(ShowOverloads));
+            OnPropertyChanged(nameof(Overloads));
         }
 
         #region Dragging
