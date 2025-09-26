@@ -625,8 +625,8 @@ namespace NetPrintsEditor.ViewModels
                     }
 
                     graph = value;
-                    RaisePropertyChanged(nameof(AllPins));
-                    RaisePropertyChanged(nameof(Visibility));
+                    RaisePropertyChanged(); // No parameterless overload in new MVVM Light, use Set or OnPropertyChanged if available, or implement INotifyPropertyChanged pattern.
+                    RaisePropertyChanged(); // No parameterless overload in new MVVM Light, use Set or OnPropertyChanged if available, or implement INotifyPropertyChanged pattern.
 
                     Nodes = new ObservableViewModelCollection<NodeVM, Node>(Graph.Nodes, n => new NodeVM(n));
 
@@ -663,7 +663,7 @@ namespace NetPrintsEditor.ViewModels
                 addedNodes.ToList().ForEach(n => SetupNodeConnections(n, true));
             }
 
-            RaisePropertyChanged(nameof(AllPins));
+            RaisePropertyChanged(); // No parameterless overload in new MVVM Light, use Set or OnPropertyChanged if available, or implement INotifyPropertyChanged pattern.
         }
 
         private void OnPinCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -690,7 +690,7 @@ namespace NetPrintsEditor.ViewModels
                 addedPins.ToList().ForEach(p => SetupPinEvents(p, true));
             }
 
-            RaisePropertyChanged(nameof(AllPins));
+            RaisePropertyChanged(); // No parameterless overload in new MVVM Light, use Set or OnPropertyChanged if available, or implement INotifyPropertyChanged pattern.
         }
 
         private void OnInputDataPinIncomingPinChanged(NodeInputDataPin pin, NodeOutputDataPin oldPin, NodeOutputDataPin newPin)
