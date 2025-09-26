@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using NetPrints.Core;
 using NetPrints.Graph;
 using NetPrintsEditor.Messages;
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 
 namespace NetPrintsEditor.ViewModels
 {
-    public class MemberVariableVM : ViewModelBase
+    public class MemberVariableVM : ObservableObject
     {
         public TypeSpecifier Type => Variable.Type;
 
@@ -160,17 +161,15 @@ namespace NetPrintsEditor.ViewModels
 
         public void OpenGetterGraph()
         {
-            MessengerInstance.Send(new OpenGraphMessage(Getter));
+            WeakReferenceMessenger.Default.Send(new OpenGraphMessage(Getter));
         }
-
         public void OpenSetterGraph()
         {
-            MessengerInstance.Send(new OpenGraphMessage(Setter));
+            WeakReferenceMessenger.Default.Send(new OpenGraphMessage(Setter));
         }
-
         public void OpenTypeGraph()
         {
-            MessengerInstance.Send(new OpenGraphMessage(Variable.TypeGraph));
+            WeakReferenceMessenger.Default.Send(new OpenGraphMessage(Variable.TypeGraph));
         }
     }
 }

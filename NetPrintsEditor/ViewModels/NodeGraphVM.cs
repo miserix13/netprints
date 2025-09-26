@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using NetPrints.Core;
 using NetPrints.Graph;
 using NetPrintsEditor.Commands;
@@ -15,7 +16,7 @@ using System.Runtime.CompilerServices;
 
 namespace NetPrintsEditor.ViewModels
 {
-    public class NodeGraphVM : ViewModelBase
+    public class NodeGraphVM : ObservableObject
     {
         public IEnumerable<SearchableComboBoxItem> Suggestions
         {
@@ -391,7 +392,7 @@ namespace NetPrintsEditor.ViewModels
 
         private void SetupNodeEvents(NodeVM node, bool add)
         {
-            // (Un)assign (old)new pins changed events [2]
+            // (Un)assign (old) new pins changed events [2]
             if (add)
             {
                 node.InputDataPins.CollectionChanged += OnPinCollectionChanged;
@@ -419,7 +420,7 @@ namespace NetPrintsEditor.ViewModels
                 node.OnDragMove -= OnNodeDragMove;
             }
 
-            // (Un)assign (old)new pin connection changed events [3]
+            // (Un)assign (old) new pin connection changed events [3]
             node.InputDataPins.ToList().ForEach(p => SetupPinEvents(p, add));
             node.OutputExecPins.ToList().ForEach(p => SetupPinEvents(p, add));
             node.InputTypePins.ToList().ForEach(p => SetupPinEvents(p, add));
@@ -754,7 +755,7 @@ namespace NetPrintsEditor.ViewModels
         /// <param name="nodes">Nodes to be selected.</param>
         public void SelectNodes(IEnumerable<NodeVM> nodes)
         {
-            MessengerInstance.Send(new NodeSelectionMessage(nodes, true));
+            WeakReferenceMessenger.Default.Send(new NodeSelectionMessage(nodes, true));
         }
 
         /// <summary>
@@ -762,15 +763,15 @@ namespace NetPrintsEditor.ViewModels
         /// </summary>
         public void DeselectNodes()
         {
-            MessengerInstance.Send(NodeSelectionMessage.DeselectAll);
+            WeakReferenceMessenger.Default.Send(NodeSelectionMessage.DeselectAll);
         }
 
         public NodeGraphVM(NodeGraph graph)
         {
             Graph = graph;
 
-            MessengerInstance.Register<NodeSelectionMessage>(this, OnNodeSelectionReceived);
-            MessengerInstance.Register<AddNodeMessage>(this, OnAddNodeReceived);
+            WeakReferenceMessenger.Default.Register<NodeGraphVM, NodeSelectionMessage>(this, (r, m) => r.OnNodeSelectionReceived(m));
+            WeakReferenceMessenger.Default.Register<AddNodeMessage>(this, (recipient, message) => OnAddNodeReceived(message));
         }
 
         private void OnNodeSelectionReceived(NodeSelectionMessage msg)

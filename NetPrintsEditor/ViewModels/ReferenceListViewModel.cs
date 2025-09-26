@@ -1,9 +1,9 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using NetPrints.Core;
 
 namespace NetPrintsEditor.ViewModels
 {
-    public class ReferenceListViewModel : ViewModelBase
+    public class ReferenceListViewModel : ObservableObject
     {
         public Project Project
         {

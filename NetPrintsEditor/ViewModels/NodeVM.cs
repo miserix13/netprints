@@ -7,6 +7,7 @@ using System.Linq;
 using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using NetPrintsEditor.Messages;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace NetPrintsEditor.ViewModels
 {
@@ -725,7 +726,7 @@ namespace NetPrintsEditor.ViewModels
 
         public void Select()
         {
-            MessengerInstance.Send(new NodeSelectionMessage(this));
+            CommunityToolkit.Mvvm.Messaging.WeakReferenceMessenger.Default.Send(new NodeSelectionMessage(this));
         }
     }
 }

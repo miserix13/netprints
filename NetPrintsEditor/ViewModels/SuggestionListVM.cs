@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using NetPrints.Core;
 using NetPrints.Graph;
 using NetPrintsEditor.Commands;
@@ -27,7 +28,7 @@ namespace NetPrintsEditor.ViewModels
         }
     }
 
-    public class SuggestionListVM : ViewModelBase
+    public class SuggestionListVM : ObservableObject
     {
         private readonly SuggestionListConverter suggestionConverter = new SuggestionListConverter();
 
@@ -42,6 +43,8 @@ namespace NetPrintsEditor.ViewModels
         private string[] splitSearchText = new string[0];
 
         public event EventHandler ItemsChanged;
+
+        private static readonly CommunityToolkit.Mvvm.Messaging.IMessenger MessengerInstance = CommunityToolkit.Mvvm.Messaging.WeakReferenceMessenger.Default;
 
         public SuggestionListVM()
         {

@@ -1,11 +1,11 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using NetPrints.Core;
 using NetPrints.Graph;
 using NetPrints.Translator;
 using NetPrintsEditor.Messages;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Timers;
@@ -13,7 +13,7 @@ using System.Windows.Threading;
 
 namespace NetPrintsEditor.ViewModels
 {
-    public class ClassEditorVM : ViewModelBase
+    public class ClassEditorVM : ObservableObject
     {
         public Project Project => Class?.Project;
 
@@ -81,7 +81,7 @@ namespace NetPrintsEditor.ViewModels
 
         public ClassEditorVM(ClassGraph cls)
         {
-            WeakReferenceMessenger.Default.Register<OpenGraphMessage>(this, OnOpenGraphReceived);
+            WeakReferenceMessenger.Default.Register<OpenGraphMessage>(this, (recipient, msg) => ((ClassEditorVM)recipient).OnOpenGraphReceived(msg));
 
             Class = cls;
 

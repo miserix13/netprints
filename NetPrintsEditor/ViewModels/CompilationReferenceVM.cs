@@ -1,10 +1,10 @@
 ﻿using System;
-using GalaSoft.MvvmLight;
+using CommunityToolkit.Mvvm.ComponentModel;
 using NetPrints.Core;
 
 namespace NetPrintsEditor.ViewModels
 {
-    public class CompilationReferenceVM : ViewModelBase
+    public class CompilationReferenceVM : ObservableObject
     {
         public bool ShowIncludeInCompilationCheckBox =>
             Reference is SourceDirectoryReference;

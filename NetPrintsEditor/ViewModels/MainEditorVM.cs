@@ -1,10 +1,11 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using NetPrints.Core;
+using System.ComponentModel;
 using System.Linq;
 
 namespace NetPrintsEditor.ViewModels
 {
-    public class MainEditorVM : ViewModelBase
+    public class MainEditorVM : ObservableObject
     {
         public bool IsProjectOpen => Project != null;
 
@@ -29,13 +30,16 @@ namespace NetPrintsEditor.ViewModels
                 Project.References.CollectionChanged += (sender, e) => ReloadReflectionProvider();
 
                 // Reload reflection provider when IsCompiling changed to false
-                Project.PropertyChanged += (sender, e) =>
+                if (Project is INotifyPropertyChanged notifyPropertyChanged)
                 {
-                    if (e.PropertyName == nameof(Project.IsCompiling) && !Project.IsCompiling)
+                    notifyPropertyChanged.PropertyChanged += (sender, e) =>
                     {
-                        ReloadReflectionProvider();
-                    }
-                };
+                        if (e.PropertyName == nameof(Project.IsCompiling) && !Project.IsCompiling)
+                        {
+                            ReloadReflectionProvider();
+                        }
+                    };
+                }
             }
 
             ReloadReflectionProvider();

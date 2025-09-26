@@ -34,11 +34,11 @@
     <None Remove="Resources\Throw_16x.png" />
     <None Remove="Resources\Type_16x.png" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="MahApps.Metro" Version="2.0.0-alpha0262" />
-    <PackageReference Include="MahApps.Metro.IconPacks" Version="3.0.0-alpha0146" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="2.10.0" />
-    <PackageReference Include="PropertyChanged.Fody" Version="3.0.1-beta.1" />
-    <PackageReference Include="System.Management" Version="8.0.0" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.11" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="6.1.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.14.0" />
+    <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+    <PackageReference Include="System.Management" Version="9.0.9" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NetPrints\NetPrints.csproj" />
